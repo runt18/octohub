@@ -54,7 +54,7 @@ def usage(e=None):
         print >> sys.stderr, 'Error: ' + str(e)
 
     cmd = os.path.basename(sys.argv[0])
-    print >> sys.stderr, 'Syntax: %s method uri [arg=val...]' % cmd
+    print >> sys.stderr, 'Syntax: {0!s} method uri [arg=val...]'.format(cmd)
     print >> sys.stderr, __doc__.strip()
 
     sys.exit(1)

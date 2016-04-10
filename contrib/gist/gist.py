@@ -51,7 +51,7 @@ def usage(e=None):
         print >> sys.stderr, 'Error: ' + str(e)
 
     cmd = os.path.basename(sys.argv[0])
-    print >> sys.stderr, 'Syntax: %s [-options] [file...fileN]' % cmd
+    print >> sys.stderr, 'Syntax: {0!s} [-options] [file...fileN]'.format(cmd)
     print >> sys.stderr, __doc__.lstrip()
 
     sys.exit(1)
@@ -59,7 +59,7 @@ def usage(e=None):
 def render_gist(gist):
     files = ' '.join(gist.files.keys()).encode('ascii', 'ignore').strip()
     visible = 'pub' if gist.public else 'sec'
-    return '[%s] %s %s' % (visible, gist.html_url, files)
+    return '[{0!s}] {1!s} {2!s}'.format(visible, gist.html_url, files)
 
 def get_gists(token, uri):
     max_pages = 0 if token else 1
@@ -123,7 +123,7 @@ def main():
     paths = args
     for path in paths:
         if not os.path.exists(path):
-            fatal('does not exist: %s' % path)
+            fatal('does not exist: {0!s}'.format(path))
 
     if len(paths) == 0:
         for gist in get_gists(token, uri):

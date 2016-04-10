@@ -40,7 +40,7 @@ def usage(e=None):
         print >> sys.stderr, 'Error: ' + str(e)
 
     cmd = os.path.basename(sys.argv[0])
-    print >> sys.stderr, 'Syntax: %s [-options] owner[/repo]' % cmd
+    print >> sys.stderr, 'Syntax: {0!s} [-options] owner[/repo]'.format(cmd)
     print >> sys.stderr, __doc__.lstrip()
 
     sys.exit(1)
@@ -89,17 +89,17 @@ def main():
     else:
         owner = args[0]
         try:
-            repos = get_repos(conn, '/orgs/%s/repos' % owner)
+            repos = get_repos(conn, '/orgs/{0!s}/repos'.format(owner))
         except ResponseError, e:
-            repos = get_repos(conn, '/users/%s/repos' % owner)
+            repos = get_repos(conn, '/users/{0!s}/repos'.format(owner))
 
     for repo in repos:
-        response = conn.send('GET', '/repos/%s/%s/pulls' % (owner, repo))
+        response = conn.send('GET', '/repos/{0!s}/{1!s}/pulls'.format(owner, repo))
         if response.parsed:
-            print '%s/%s\n' % (owner, repo)
+            print '{0!s}/{1!s}\n'.format(owner, repo)
             for pull in response.parsed:
-                print '  [%s] %s' % (pull.head.user.login, pull.title)
-                print '  %s' % pull.html_url
+                print '  [{0!s}] {1!s}'.format(pull.head.user.login, pull.title)
+                print '  {0!s}'.format(pull.html_url)
                 print
 
 
