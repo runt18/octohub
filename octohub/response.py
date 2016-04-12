@@ -41,7 +41,7 @@ def _parse_link(header_link):
         rel = m.groups()[0]
 
         links[rel] = link
-        log.debug('link-%s-page: %s' % (rel, link.params['page']))
+        log.debug('link-{0!s}-page: {1!s}'.format(rel, link.params['page']))
 
     return links
 
@@ -82,7 +82,7 @@ def parse_response(response):
     headers = ['status', 'x-ratelimit-limit', 'x-ratelimit-remaining']
     for header in headers:
         if header in response.headers.keys():
-            log.info('%s: %s' % (header, response.headers[header]))
+            log.info('{0!s}: {1!s}'.format(header, response.headers[header]))
 
     content_type = _get_content_type(response)
 
@@ -93,7 +93,7 @@ def parse_response(response):
         response.parsed = parse_element(json)
     else:
         if not response.status_code == 204:
-            raise OctoHubError('unhandled content_type: %s' % content_type)
+            raise OctoHubError('unhandled content_type: {0!s}'.format(content_type))
 
     if not response.status_code in (200, 201, 204):
         raise ResponseError(response.parsed)

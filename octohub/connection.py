@@ -53,7 +53,7 @@ class Connection(object):
         self.headers = {'User-Agent': __useragent__}
 
         if token:
-            self.headers['Authorization'] = 'token %s' % token
+            self.headers['Authorization'] = 'token {0!s}'.format(token)
 
     def send(self, method, uri, params={}, data=None):
         """Prepare and send request

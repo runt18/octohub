@@ -44,7 +44,7 @@ def usage(e=None):
     if e:
         print >> sys.stderr, 'Error:', e
 
-    print >> sys.stderr, 'Syntax: %s [-options] issues.json outdir' % sys.argv[0]
+    print >> sys.stderr, 'Syntax: {0!s} [-options] issues.json outdir'.format(sys.argv[0])
     print >> sys.stderr, __doc__.strip()
 
     sys.exit(1)
@@ -73,7 +73,7 @@ def output_issues(issues, outdir):
         slug = slugify(issue.title)
 
         path = os.path.join(outdir, 'all', str(issue.number))
-        path_symlink = '../../all/%s' % str(issue.number)
+        path_symlink = '../../all/{0!s}'.format(str(issue.number))
         mkdir(os.path.dirname(path))
         file(path, 'w').write(json.dumps(issue, indent=1))
 
@@ -112,7 +112,7 @@ def main():
     outdir = args[1]
 
     if not os.path.exists(infile):
-        fatal('path does not exist: %s' % infile)
+        fatal('path does not exist: {0!s}'.format(infile))
 
     if init:
         for dir in ('state', 'labels', 'assignee'):
