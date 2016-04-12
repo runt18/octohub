@@ -55,7 +55,7 @@ class Connection(object):
         if token:
             self.headers['Authorization'] = 'token {0!s}'.format(token)
 
-    def send(self, method, uri, params={}, data=None):
+    def send(self, method, uri, params=None, data=None):
         """Prepare and send request
             method (str): Request HTTP method (e.g., GET, POST, DELETE, ...)
             uri (str): Request URI (e.g., /user/issues)
@@ -67,6 +67,8 @@ class Connection(object):
                 response.parsed_link (AttrDict): parsed header link when applicable
                 http://docs.python-requests.org/en/latest/api/#requests.Response
         """
+        if params is None:
+            params = {}
         url = self.endpoint + uri
         kwargs = {'headers': self.headers, 'params': params, 'data': data}
         response = requests.request(method, url, **kwargs)
